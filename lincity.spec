@@ -5,7 +5,7 @@
 %ifnarch %{ix86} alpha
 %define _without_svgalib 1
 %endif
-Summary:	LinCity is a city/country simulation game for X and Linux SVGALib. 
+Summary:	LinCity is a city/country simulation game for X and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
 Version:	1.11
