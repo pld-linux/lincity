@@ -72,7 +72,7 @@ Program wykonywalny dla SVGALib.
 %build
 ln -s lincity.man xlincity.man
 %{__make} xlincity
-%{!?no_svgalib:%{__make} lincity}
+%{!?_without_svgalib:%{__make} lincity}
 
 %install
 rm -rf $RPM_BUILD_ROOT
