@@ -8,17 +8,21 @@
 Summary:	Lincity is a city/country simulation game for X11 and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
-Version:	1.11
-Release:	5
+Version:	1.12.0
+Release:	0.1
 License:	GPL
 Group:		Applications/Games
-Source0:	ftp://ftp.demon.co.uk/pub/unix/linux/games/%{name}-%{version}.tar.gz
-# Source0-md5:	fa64ddfe0a6ca95a614843ac2fcd2473
+Source0:	http://dl.sourceforge.net/lincity/%{name}-%{version}.tar.gz
+# Source0-md5:	98daeef749d3ec17208193b6a1dc6b03
 Source1:	%{name}.desktop
 Source2:	%{name}.png
-URL:		http://www.floot.demon.co.uk/lincity.html
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-GCC.patch
+URL:		http://lincity.sourceforge.net/
+#Patch0:		%{name}-DESTDIR.patch
+#Patch1:		%{name}-GCC.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	gettext-devel
+BuildRequires:	libtool
 %{!?_without_svga:BuildRequires:	svgalib-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -67,42 +71,52 @@ Program wykonywalny dla SVGALib.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+#%patch0 -p1
+#%patch1 -p1
 
 %build
-ln -s lincity.man xlincity.man
-%{__make} xlincity
-%{!?_without_svga:%{__make} lincity}
+#ln -s lincity.man xlincity.man
+#%{__make} xlincity
+#%{!?_without_svga:%{__make} lincity}
+rm -f missing
+%{__libtoolize}
+%{__gettextize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install -D %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/Strategy/lincity.desktop
 install -D %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/lincity.png
 
 echo ".so lincity.6" > $RPM_BUILD_ROOT%{_mandir}/man6/xlincity.6
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc Acknowledgements BUGS CHANGES COPYRIGHT FAQ README
-%doc README.profiling README.INSTALL
-%{_libdir}/games/lincity
-%{_mandir}/man6/lincity*
+%doc Acknowledgements CHANGES COPYRIGHT README*
+%{_datadir}/%{name}
+%{_mandir}/man?/lincity*
 
 %files X11
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_prefix}/games/xlincity
+%attr(755,root,root) %{_bindir}/xlincity
 %{_applnkdir}/Games/Strategy/lincity.desktop
 %{_pixmapsdir}/lincity.png
-%{_mandir}/man6/xlincity*
+%{_mandir}/man?/xlincity*
 
 %if %{?_without_svga:0}%{!?_without_svga:1}
 %files svga
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_prefix}/games/lincity
+%attr(755,root,root) %{_bindir}/lincity
 %endif
