@@ -3,5 +3,5 @@ Name=Lincity
 Description=City/country simulation strategy game
 Description[pl]=Gra strategiczna symulująca kraj/miasto
 Icon=lincity.png
-Exec=xlincity
+Exec=/usr/games/xlincity
 # vi: encoding=utf-8
