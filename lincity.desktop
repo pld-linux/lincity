@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Lincity
-Description=
+Description=City/country simulation strategy game
+Description[pl]=Gra strategiczna symulująca kraj/miasto
 Exec=xlincity
 # vi: encoding=utf-8
