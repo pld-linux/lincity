@@ -5,7 +5,7 @@
 %ifnarch %{ix86} alpha
 %define _without_svgalib 1
 %endif
-Summary:	LinCity is a city/country simulation game for X and Linux SVGALib
+Summary:	Lincity is a city/country simulation game for X and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
 Version:	1.11
@@ -13,13 +13,13 @@ Release:	3
 License:	GPL
 Group:		Applications/Games
 Source0:	ftp://ftp.demon.co.uk/pub/unix/linux/games/%{name}-%{version}.tar.gz
-URL:		http://www.floot.demon.co.uk/lincity.html
 Source1:	%{name}.desktop
+Source2:	%{name}.png
+URL:		http://www.floot.demon.co.uk/lincity.html
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-GCC.patch
 %{!?_without_svgalib:BuildRequires:	svgalib-devel}
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 X11 and SVGALib strategy game. You are required to build and maintain
@@ -32,13 +32,13 @@ place, this is not a game that you can leave for long periods of time.
 This package contains shared files for X11 and SVGALib.
 
 %description -l pl
-Gra strategiczna dla X11 oraz SVGALib. Trzeba wybudowaæ i zarz±dzaæ
-miastem. Trzeba karmiæ, budowaæ, zapewniæ pracê i inne dobra dla
-mieszkañców. Mo¿na stworzyæ wytrzyma³± gospodarkê z pomoc±
-odnawialnych ¼róde³ energii i recyclingu, mo¿na te¿ niszczyæ i budowaæ
-rakiety, aby uciec z zanieczyszczonej planety wyczyszczonej z zasobów.
-Ca³e ¿ycie miasta znajduje siê w rêkach gracza. Ten pakiet zawiera
-pliki wspólne dla wersji X11 oraz SVGALib.
+Gra strategiczna dla X11 oraz SVGALib. Trzeba wybudowaæ miasto i nim
+zarz±dzaæ. Trzeba karmiæ mieszkañców, zapewniæ im mieszkanie, pracê i
+inne dobra. Mo¿na stworzyæ solidn± gospodarkê korzystaj±c z
+odnawialnych ¼róde³ energii i przetwórstwa odpadów. Mo¿na te¿ wielkim
+wysi³kim zbudowaæ rakiety, aby uciec z zanieczyszczonej, pozbawionej
+zasobów planety. Ca³e ¿ycie miasta znajduje siê w rêkach gracza. Ten
+pakiet zawiera pliki wspólne dla wersji X11 oraz SVGALib.
 
 %package X11
 Summary:	Lincity for X11
@@ -65,9 +65,9 @@ Executable version for SVGALib.
 Program wykonywalny dla SVGALib.
 
 %prep
-%setup -q 
-%patch0 -p1 
-%patch1 -p1 
+%setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 ln -s lincity.man xlincity.man
@@ -79,27 +79,29 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install -D %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/lincity.desktop
+install -D %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/lincity.png
 
 echo ".so lincity.6" > $RPM_BUILD_ROOT%{_mandir}/man6/xlincity.6
 
-%clean 
+%clean
 rm -rf $RPM_BUILD_ROOT
 
-%files 
+%files
 %defattr(644,root,root,755)
-%doc Acknowledgements BUGS CHANGES COPYING COPYRIGHT FAQ README
+%doc Acknowledgements BUGS CHANGES COPYRIGHT FAQ README
 %doc README.profiling README.INSTALL
 %{_libdir}/games/lincity
-%{_applnkdir}/Games/lincity.desktop
 %{_mandir}/man6/lincity*
 
 %files X11
 %defattr(644,root,root,755)
-%attr(511,root,root)%{_prefix}/games/xlincity
+%attr(755,root,root) %{_prefix}/games/xlincity
+%{_applnkdir}/Games/lincity.desktop
+%{_pixmapsdir}/lincity.png
 %{_mandir}/man6/xlincity*
 
 %if %{?_without_svgalib:0}%{!?_without_svgalib:1}
 %files SVGALib
 %defattr(644,root,root,755)
-%attr(511,root,root)%{_prefix}/games/lincity
+%attr(755,root,root) %{_prefix}/games/lincity
 %endif
