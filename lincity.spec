@@ -9,7 +9,7 @@ Summary:	Lincity is a city/country simulation game for X11 and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
 Version:	1.11
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Games
 Source0:	ftp://ftp.demon.co.uk/pub/unix/linux/games/%{name}-%{version}.tar.gz
@@ -78,7 +78,7 @@ ln -s lincity.man xlincity.man
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-install -D %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/lincity.desktop
+install -D %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/Strategy/lincity.desktop
 install -D %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/lincity.png
 
 echo ".so lincity.6" > $RPM_BUILD_ROOT%{_mandir}/man6/xlincity.6
@@ -96,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 %files X11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_prefix}/games/xlincity
-%{_applnkdir}/Games/lincity.desktop
+%{_applnkdir}/Games/Strategy/lincity.desktop
 %{_pixmapsdir}/lincity.png
 %{_mandir}/man6/xlincity*
 
