@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Lincity
-Description=City/country simulation strategy game
-Description[pl]=Gra strategiczna symulująca kraj/miasto
+Comment=City/country simulation strategy game
+Comment[pl]=Gra strategiczna symulująca kraj/miasto
 Icon=lincity.png
 Exec=/usr/games/xlincity
 Type=Application
