@@ -20,7 +20,7 @@ URL:		http://www.floot.demon.co.uk/lincity.html
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-GCC.patch
 %{!?_without_svga:BuildRequires:	svgalib-devel}
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 X11 and SVGALib strategy game. You are required to build and maintain
