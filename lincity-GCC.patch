@@ -328,3 +328,25 @@ diff -urN lincity-1.11/typeinit.cxx lincity-1.11.new/typeinit.cxx
  #include "common.h"
  #include "lctypes.h"
  #include "lin-city.h"
+--- lincity-1.11/Imakefile	Sat Feb 13 23:55:02 1999
++++ lincity-1.11.new/Imakefile	Tue Jan 28 23:56:21 2003
+@@ -8,7 +8,7 @@
+ 
+ LOCAL_LIBRARIES = $(XLIB)
+         DEPLIBS = $(DEPXLIB)
+-  SYS_LIBRARIES = -lm
++  SYS_LIBRARIES = -lm -lstdc++
+ 
+            SRCS = main.cxx mouse.cxx screen.cxx mps.cxx typeinit.cxx\
+                   engine.cxx transport.cxx market.cxx help.cxx lcx11.cxx
+--- lincity-1.11/mouse.cxx	Tue Jan 28 23:38:29 2003
++++ lincity-1.11.new/mouse.cxx	Wed Jan 29 00:03:26 2003
+@@ -43,7 +43,7 @@
+   cs_mouse_xmax = 640 - 1;
+   cs_mouse_ymax = 480 - 1;
+   Fgl_getbox (mox, moy, 8, 8, under_mouse_pointer);
+-  mouse_seteventhandler (cs_mouse_handler);
++  mouse_seteventhandler ((void*)cs_mouse_handler);
+ }
+ 
+ void
