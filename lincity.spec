@@ -61,6 +61,7 @@ Program wykonywalny dla X11.
 %patch1 -p1 
 
 %build
+ln -s lincity.man xlincity.man
 %{__make} xlincity
 %{!?no_svgalib:%{__make} lincity}
 
@@ -73,6 +74,8 @@ install $RPM_SOURCE_DIR/lincity.desktop $RPM_BUILD_ROOT%{_sysconfdir}/X11/applnk
 gzip -9nf Acknowledgements BUGS CHANGES COPYING COPYRIGHT FAQ README \
          README.profiling README.INSTALL 
 
+echo ".so lincity.6" > $RPM_BUILD_ROOT%{_mandir}/man6/xlincity.6
+
 %clean 
 rm -rf $RPM_BUILD_ROOT
 
@@ -80,12 +83,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/games/lincity
 %{_sysconfdir}/X11/applnk/Games/lincity.desktop
-%{_mandir}/man6/*
+%{_mandir}/man6/lincity*
 %doc *.gz
 
 %files X11
 %defattr(644,root,root,755)
 %attr(511,root,root)%{_prefix}/games/xlincity
+%{_mandir}/man6/xlincity*
 
 %{!?no_svgalib:%files SVGALib}
 %{!?no_svgalib:%defattr(644,root,root,755)}
