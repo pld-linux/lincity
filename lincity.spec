@@ -12,6 +12,7 @@ URL:		http:///www.floot.demon.co.uk/lincity.html
 Source1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-GCC.patch
+BuildRequires:	svgalib
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
