@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_svga - without svgalib support
+%bcond_without	svga	# with svgalib support
 #
 %ifnarch %{ix86} alpha
 %define _without_svga 1
@@ -9,7 +9,7 @@ Summary:	Lincity is a city/country simulation game for X11 and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
 Version:	1.12.0
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/lincity/%{name}-%{version}.tar.gz
@@ -23,7 +23,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
-%{!?_without_svga:BuildRequires:	svgalib-devel}
+%{?with_svga:BuildRequires:	svgalib-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -71,13 +71,8 @@ Program wykonywalny dla SVGALib.
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p1
 
 %build
-#ln -s lincity.man xlincity.man
-#%{__make} xlincity
-#%{!?_without_svga:%{__make} lincity}
 rm -f missing
 %{__libtoolize}
 %{__gettextize}
@@ -104,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc Acknowledgements CHANGES COPYRIGHT README*
+%doc Acknowledgements CHANGES COPYRIGHT README* TODO
 %{_datadir}/%{name}
 %{_mandir}/man?/lincity*
 
@@ -115,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/lincity.png
 %{_mandir}/man?/xlincity*
 
-%if %{?_without_svga:0}%{!?_without_svga:1}
+%if %{with svga}
 %files svga
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lincity
