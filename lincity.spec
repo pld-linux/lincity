@@ -12,7 +12,7 @@ URL:		http:///www.floot.demon.co.uk/lincity.html
 Source1:	%{name}.desktop
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-GCC.patch
-BuildRequires:	svgalib
+%{!?no_svgalib:BuildRequires:	svgalib}
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,19 +44,19 @@ Executable version for X11.
 %description X11 -l pl
 Program wykonywalny dla X11.
 
-%package SVGALib
-Summary:	Lincity for SVGALib
-Summary(pl):	Lincity dla SVGALib
-Group:		Applications/Games
-Group(de):	Applikationen/Spiele
-Group(pl):	Aplikacje/Gry
-Requires:	%{name} = %{version}
+%{!?no_svgalib:%package SVGALib}
+%{!?no_svgalib:Summary:	Lincity for SVGALib}
+%{!?no_svgalib:Summary(pl):	Lincity dla SVGALib}
+%{!?no_svgalib:Group:		Applications/Games}
+%{!?no_svgalib:Group(de):	Applikationen/Spiele}
+%{!?no_svgalib:Group(pl):	Aplikacje/Gry}
+%{!?no_svgalib:Requires:	%{name} = %{version}}
 
-%description SVGALib
-Executable version for SVGALib.
+%{!?no_svgalib:%description SVGALib}
+%{!?no_svgalib:Executable version for SVGALib.}
 
-%description SVGALib -l pl
-Program wykonywalny dla SVGALib.
+%{!?no_svgalib:%description SVGALib -l pl}
+%{!?no_svgalib:Program wykonywalny dla SVGALib.}
 
 %prep
 
@@ -66,7 +66,7 @@ Program wykonywalny dla SVGALib.
 
 %build
 %{__make} xlincity
-%{__make} lincity
+%{!?no_svgalib:%{__make} lincity}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -91,6 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(511,root,root)%{_prefix}/games/xlincity
 
-%files SVGALib
-%defattr(644,root,root,755)
-%attr(511,root,root)%{_prefix}/games/lincity
+%{!?no_svgalib:%files SVGALib}
+%{!?no_svgalib:%defattr(644,root,root,755)}
+%{!?no_svgalib:%attr(511,root,root)%{_prefix}/games/lincity}
