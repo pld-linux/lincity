@@ -78,8 +78,7 @@ ln -s lincity.man xlincity.man
 rm -rf $RPM_BUILD_ROOT
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/applnk/Games
-install $RPM_SOURCE_DIR/lincity.desktop $RPM_BUILD_ROOT%{_sysconfdir}/X11/applnk/Games
+install -D %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/lincity.desktop
 
 echo ".so lincity.6" > $RPM_BUILD_ROOT%{_mandir}/man6/xlincity.6
 
@@ -91,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc Acknowledgements BUGS CHANGES COPYING COPYRIGHT FAQ README
 %doc README.profiling README.INSTALL
 %{_libdir}/games/lincity
-%{_sysconfdir}/X11/applnk/Games/lincity.desktop
+%{_applnkdir}/Games/lincity.desktop
 %{_mandir}/man6/lincity*
 
 %files X11
