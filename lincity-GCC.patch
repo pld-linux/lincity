@@ -1,0 +1,330 @@
+diff -urN lincity-1.11/Makefile lincity-1.11.new/Makefile
+--- lincity-1.11/Makefile	Fri Feb 26 05:17:38 1999
++++ lincity-1.11.new/Makefile	Fri Oct  6 19:16:52 2000
+@@ -26,7 +26,7 @@
+ # EXTRA_OPTS = -fstrength-reduce -ffast-math
+ WARN_OPTS  = -Wall -Wpointer-arith -Wcast-align -Winline
+ # DEBUG_OPTS =-g
+-CFLAGS = -O2 $(DEBUG_OPTS) $(EXTRA_OPTS) $(WARN_OPTS) -DLIBDIR=\"$(LC_LIBDIR)\"
++CFLAGS = -O3 $(DEBUG_OPTS) $(EXTRA_OPTS) $(WARN_OPTS) -DLIBDIR=\"$(LC_LIBDIR)\"
+ # -fno-strength-reduce
+ # PROFF = -pg
+ # PROFL = -lc
+diff -urN lincity-1.11/help.cxx lincity-1.11.new/help.cxx
+--- lincity-1.11/help.cxx	Fri Feb 26 02:17:54 1999
++++ lincity-1.11.new/help.cxx	Fri Oct  6 19:16:49 2000
+@@ -6,9 +6,7 @@
+ #if !defined (WIN32)
+ #include <strings.h>
+ #endif
+-#if defined (WIN32) || defined (SCO)
+ #include <string.h>
+-#endif
+ #include <ctype.h>
+ #include "common.h"
+ #include "lctypes.h"
+diff -urN lincity-1.11/lcx11.cxx lincity-1.11.new/lcx11.cxx
+--- lincity-1.11/lcx11.cxx	Fri Feb 26 02:17:54 1999
++++ lincity-1.11.new/lcx11.cxx	Fri Oct  6 19:16:49 2000
+@@ -5,6 +5,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <math.h>
++#include <string.h>
+ #ifdef IRIX
+ #include <strings.h>
+ #endif
+@@ -715,7 +716,7 @@
+ #ifdef USE_IMAGES
+   Fgl_putbox_low (display.win, 0, 0,
+ 		  x1, y1, x2 - x1, y2 - y1,
+-		  pixmap, (640 + BORDERX),
++		  (unsigned char *)pixmap, (640 + BORDERX),
+ 		  x1, y1);
+ #else
+   int x, y;
+diff -urN lincity-1.11/main.cxx lincity-1.11.new/main.cxx
+--- lincity-1.11/main.cxx	Fri Feb 26 02:17:54 1999
++++ lincity-1.11.new/main.cxx	Fri Oct  6 19:16:49 2000
+@@ -1,15 +1,13 @@
+ // main.cxx    part of lin-city
+ // Copyright (c) I J Peters 1995,1996.  Please read the file 'COPYRIGHT'.
+ 
+-
++#include <string.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+ #if !defined (WIN32)
+ #include <strings.h>
+ #endif
+-#if defined (SCO) || defined (WIN32)
+ #include <string.h>
+-#endif
+ 
+ // this is for OS/2 - RVI
+ #ifdef __EMX__
+diff -urN lincity-1.11/mouse.cxx lincity-1.11.new/mouse.cxx
+--- lincity-1.11/mouse.cxx	Fri Feb 26 02:17:54 1999
++++ lincity-1.11.new/mouse.cxx	Fri Oct  6 19:16:49 2000
+@@ -6,9 +6,7 @@
+ #if !defined (WIN32)
+ #include <strings.h>
+ #endif
+-#if defined (SCO) || defined (WIN32)
+ #include <string.h>
+-#endif
+ 
+ #include "common.h"
+ #include "lctypes.h"
+diff -urN lincity-1.11/mps.cxx lincity-1.11.new/mps.cxx
+--- lincity-1.11/mps.cxx	Fri Feb 26 02:17:54 1999
++++ lincity-1.11.new/mps.cxx	Fri Oct  6 19:16:49 2000
+@@ -8,9 +8,7 @@
+ #include <strings.h>
+ #include <unistd.h>
+ #endif
+-#if defined (SCO) || defined (WIN32)
+ #include <string.h>
+-#endif
+ #include "common.h"
+ #include "lctypes.h"
+ #include "lin-city.h"
+diff -urN lincity-1.11/patch lincity-1.11.new/patch
+--- lincity-1.11/patch	Thu Jan  1 01:00:00 1970
++++ lincity-1.11.new/patch	Fri Oct  6 19:16:49 2000
+@@ -0,0 +1,26 @@
++--- lincity-1.09.orig/engine.cxx        Mon Apr 14 10:18:07 1997
+++++ lincity-1.09/engine.cxx     Fri Nov  7 13:17:54 1997
++@@ -370,9 +370,9 @@
++		;  // do nothing
++	else
++	{
++-		mappoint[x][y].int_1+=(POWERS_SOLAR_OUTPUT
++-			+((POWERS_SOLAR_OUTPUT*2)*mappoint[x][y].int_2)
++-			/MAX_TECH_LEVEL/2);
+++		mappoint[x][y].int_1+=(int)(POWERS_SOLAR_OUTPUT
+++			+((double)POWERS_SOLAR_OUTPUT*mappoint[x][y].int_2)
+++			/MAX_TECH_LEVEL);
++		return;
++	}
++ // Now try and give it away. Only two places it can go; up or left
++@@ -454,8 +454,8 @@
++				mappoint[x][y].int_3-=JOBS_COALPS_GENERATE;
++				mappoint[x][y].int_2-=POWERS_COAL_OUPUT/600;
++				coal_used+=POWERS_COAL_OUPUT/600;
++-				mappoint[x][y].int_1+=(POWERS_COAL_OUPUT
++-			+(POWERS_COAL_OUPUT*mappoint[x][y].int_4)
+++				mappoint[x][y].int_1+=(int)(POWERS_COAL_OUPUT
+++			+((double)POWERS_COAL_OUPUT*mappoint[x][y].int_4)
++					/MAX_TECH_LEVEL);
++				mappointpol[x][y]+=POWERS_COAL_POLLUTION;
++			}
+diff -urN lincity-1.11/picedit.cxx lincity-1.11.new/picedit.cxx
+--- lincity-1.11/picedit.cxx	Fri Feb 26 02:17:56 1999
++++ lincity-1.11.new/picedit.cxx	Fri Oct  6 19:16:49 2000
+@@ -7,9 +7,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <strings.h>
+-#ifdef SCO
+ #include <string.h>
+-#endif
+ #include <sys/types.h>
+ #include <unistd.h>
+ //#ifndef SUNOS
+diff -urN lincity-1.11/screen.cxx lincity-1.11.new/screen.cxx
+--- lincity-1.11/screen.cxx	Sun Feb 14 02:03:12 1999
++++ lincity-1.11.new/screen.cxx	Fri Oct  6 19:16:49 2000
+@@ -8,9 +8,7 @@
+ #include <strings.h>
+ #include <unistd.h>
+ #endif
+-#if defined (SCO) || defined (WIN32)
+ #include <string.h>
+-#endif
+ #include "common.h"
+ #include "lctypes.h"
+ #include "lin-city.h"
+diff -urN lincity-1.11/transport.cxx lincity-1.11.new/transport.cxx
+--- lincity-1.11/transport.cxx	Sat Feb 13 23:50:22 1999
++++ lincity-1.11.new/transport.cxx	Fri Oct  6 19:16:49 2000
+@@ -13,10 +13,8 @@
+ {
+ // use int_1 to hold the packet
+ // use int_2 to hold current direction of packets
+-// use int_3 to hold the max count in a direction. Used so packets can get
+-// round T junctions.
+-	static int dirrand=1,disrand=1;
+-	int r,nx,ny;
++       static int dirrand=1;
++       int r,nx,ny,dc,pd,dirs[4];
+ #ifdef DEBUG_ENGINE
+ 	printf("In do_power_line\n");
+ #endif
+@@ -24,74 +22,102 @@
+ 	if (mappoint[x][y].int_1==0)  // i suppose there's nothing to do
+ 		return;
+ // go and search for a place to put it.
+-// If we have a direction, use it, else search a random one.
+-	if (mappoint[x][y].int_2!=0)
+-		r=mappoint[x][y].int_2;
+-	else
+-	{
+-		r=dirrand++;
+-		if (dirrand>=5)
+-			dirrand=1;
+-		mappoint[x][y].int_3=disrand++;
+-		if (disrand>40)
+-			disrand=0;
+-	}
+-	if (r==1)
+-	{
++// Find possible directions (ignore backwards).
++       dc=0;                       // dc = number of valid directions
++       pd=mappoint[x][y].int_2;    // pd = previous direction
++
++// check direction #1
++       if (pd!=4) {
+ 		nx=x;
+ 		ny=y-1;
+-		if (y>1 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT
+-				+FLAG_IS_RIVER))!=0)
++               if (ny>0 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
+ 			ny--;
+-	}
+-	else if (r==2)
+-	{
++               }
++               if (main_types[mappointtype[nx][ny]].group==GROUP_POWER_LINE && mappoint[nx][ny].int_1==0) {
++                       dirs[dc++]=1;
++               }
++	}
++
++// check direction #2
++       if (pd!=3) {
+ 		nx=x-1;
+ 		ny=y;
+-		if (x>1 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT
+-				+FLAG_IS_RIVER))!=0)
++               if (nx>0 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
+ 			nx--;
+-	}
+-	else if (r==3)
+-	{
++               }
++               if (main_types[mappointtype[nx][ny]].group==GROUP_POWER_LINE && mappoint[nx][ny].int_1==0) {
++                       dirs[dc++]=2;
++               }
++	}
++
++// check direction #3
++       if (pd!=2) {
+ 		nx=x+1;
+ 		ny=y;
+-		if (x<WORLD_SIDE_LEN-2
+-			&& (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT
+-				+FLAG_IS_RIVER))!=0)
++               if (nx<WORLD_SIDE_LEN-1 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
+ 			nx++;
+-	}
+-	else if (r==4)
+-	{
++               }
++               if (main_types[mappointtype[nx][ny]].group==GROUP_POWER_LINE && mappoint[nx][ny].int_1==0) {
++                       dirs[dc++]=3;
++               }
++	}
++
++// check direction #4
++       if (pd!=1) {
+ 		nx=x;
+ 		ny=y+1;
+-		if (y<WORLD_SIDE_LEN-2
+-			&& (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT
+-				+FLAG_IS_RIVER))!=0)
++               if (ny<WORLD_SIDE_LEN-1 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
+ 			ny++;
+-	}
+-	else
+-	{
++               }
++               if (main_types[mappointtype[nx][ny]].group==GROUP_POWER_LINE && mappoint[nx][ny].int_1==0) {
++                       dirs[dc++]=4;
++               }
++	}
++
++// allow backtrack only if necessary
++       if (dc==0) {
+ 		mappoint[x][y].int_2=0;
+ 		return;
+ 	}
+-	if (main_types[mappointtype[nx][ny]].group==GROUP_POWER_LINE
+-		&& mappoint[nx][ny].int_1==0)
+-	{
+-		mappoint[nx][ny].int_1=1;
+-		if (mappointtype[nx][ny]>CST_POWERL_LUDR_L)
+-			mappointtype[nx][ny]-=11;
+-		mappoint[x][y].int_1=0;
+-		if (mappointtype[x][y]<=CST_POWERL_LUDR_L)
+-			mappointtype[x][y]+=11;
+-		if (mappoint[x][y].int_3-- >0)
+-		{
+-			mappoint[nx][ny].int_2=r;
+-			mappoint[nx][ny].int_3=mappoint[x][y].int_3;
+-			mappoint[x][y].int_3=0;
++
++// chose a direction and convert into coordinates
++       r=dirs[dirrand++ % dc];
++       if (dirrand < 0) dirrand=0; // using % (mod) so count as high as possible
++
++       if (r==1) {
++               nx=x;
++               ny=y-1;
++               if (ny>0 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
++                       ny--;
++               }
++       } else if (r==2) {
++               nx=x-1;
++               ny=y;
++               if (nx>0 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
++                       nx--;
++               }
++       } else if (r==3) {
++               nx=x+1;
++               ny=y;
++               if (nx<WORLD_SIDE_LEN-1 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
++                       nx++;
++               }
++       } else {
++               nx=x;
++               ny=y+1;
++               if (ny<WORLD_SIDE_LEN-1 && (mappoint[nx][ny].flags & (FLAG_IS_TRANSPORT+FLAG_IS_RIVER))!=0) {
++                       ny++;
+ 		}
+ 	}
+-	mappoint[x][y].int_2=0;
++
++// advance the power
++       mappoint[nx][ny].int_1=1;
++       if (mappointtype[nx][ny]>CST_POWERL_LUDR_L)
++               mappointtype[nx][ny]-=11;
++       mappoint[x][y].int_1=0;
++       if (mappointtype[x][y]<=CST_POWERL_LUDR_L)
++               mappointtype[x][y]+=11;
++       mappoint[nx][ny].int_2=r;
+ }
+ 
+ #ifdef THMO_TRANSPORT
+diff -urN lincity-1.11/typeinit.cxx lincity-1.11.new/typeinit.cxx
+--- lincity-1.11/typeinit.cxx	Sat Feb 13 23:51:54 1999
++++ lincity-1.11.new/typeinit.cxx	Fri Oct  6 19:16:49 2000
+@@ -7,9 +7,7 @@
+ #if !defined (WIN32)
+ #include <strings.h>
+ #endif
+-#if defined (SCO) || defined (WIN32)
+ #include <string.h>
+-#endif
+ #include "common.h"
+ #include "lctypes.h"
+ #include "lin-city.h"
