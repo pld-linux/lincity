@@ -34,11 +34,11 @@ This package contains shared files for X11 and SVGALib.
 %description -l pl
 Gra strategiczna dla X11 oraz SVGALib. Trzeba wybudowaæ miasto i nim
 zarz±dzaæ. Trzeba karmiæ mieszkañców, zapewniæ im mieszkanie, pracê i
-inne dobra. Mo¿na stworzyæ solidn± gospodarkê korzystaj±c z
-odnawialnych ¼róde³ energii i przetwórstwa odpadów. Mo¿na te¿ wielkim
-wysi³kim zbudowaæ rakiety, aby uciec z zanieczyszczonej, pozbawionej
-zasobów planety. Ca³e ¿ycie miasta znajduje siê w rêkach gracza. Ten
-pakiet zawiera pliki wspólne dla wersji X11 oraz SVGALib.
+inne dobra. Mo¿na stworzyæ solidn± gospodarkê korzystaj±c z odnawialnych 
+¼róde³ energii i przetwórstwa odpadów. Mo¿na te¿ wielkim wysi³kiem 
+zbudowaæ rakiety, aby uciec z zanieczyszczonej, pozbawionej zasobów 
+planety. Ca³e ¿ycie miasta znajduje siê w rêkach gracza. Ten pakiet 
+zawiera pliki wspólne dla wersji X11 oraz SVGALib.
 
 %package X11
 Summary:	Lincity for X11
