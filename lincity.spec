@@ -2,9 +2,6 @@
 # Conditional build:
 %bcond_without	svga	# without svgalib support
 #
-%ifnarch %{ix86} alpha
-%undefine with_svga
-%endif
 Summary:	Lincity is a city/country simulation game for X11 and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
@@ -49,7 +46,7 @@ pakiet zawiera pliki wspólne dla wersji X11 oraz SVGALib.
 Summary:	Lincity for X11
 Summary(pl):	Lincity dla X11
 Group:		X11/Applications/Games/Strategy
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description X11
 Executable version for X11.
@@ -61,7 +58,7 @@ Program wykonywalny dla X11.
 Summary:	Lincity for SVGALib
 Summary(pl):	Lincity dla SVGALib
 Group:		Applications/Games
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description svga
 Executable version for SVGALib.
