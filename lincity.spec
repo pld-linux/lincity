@@ -8,12 +8,12 @@
 Summary:	Lincity is a city/country simulation game for X11 and Linux SVGALib
 Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
-Version:	1.12.0
-Release:	2
+Version:	1.13.0
+Release:	1
 License:	GPL
 Group:		Applications/Games
 Source0:	http://dl.sourceforge.net/lincity/%{name}-%{version}.tar.gz
-# Source0-md5:	98daeef749d3ec17208193b6a1dc6b03
+# Source0-md5:	007159a2e6cce680c629a73f97fe96f2
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://lincity.sourceforge.net/
