@@ -13,6 +13,7 @@ Release:	4
 License:	GPL
 Group:		Applications/Games
 Source0:	ftp://ftp.demon.co.uk/pub/unix/linux/games/%{name}-%{version}.tar.gz
+# Source0-md5:	fa64ddfe0a6ca95a614843ac2fcd2473
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.floot.demon.co.uk/lincity.html
