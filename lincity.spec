@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -D %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games/Strategy/lincity.desktop
+install -D %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}/lincity.desktop
 install -D %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}/lincity.png
 
 echo ".so lincity.6" > $RPM_BUILD_ROOT%{_mandir}/man6/xlincity.6
@@ -106,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %files X11
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xlincity
-%{_applnkdir}/Games/Strategy/lincity.desktop
+%{_desktopdir}/lincity.desktop
 %{_pixmapsdir}/lincity.png
 %{_mandir}/man?/xlincity*
 
