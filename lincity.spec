@@ -5,8 +5,6 @@ Version:	1.11
 Release:	1
 License:	GPL
 Group:		Applications/Games
-Group(de):	Applikationen/Spiele
-Group(pl):	Aplikacje/Gry
 Source0:	ftp://ftp.demon.co.uk/pub/unix/linux/games/%{name}-%{version}.tar.gz
 URL:		http:///www.floot.demon.co.uk/lincity.html
 Source1:	%{name}.desktop
@@ -34,8 +32,6 @@ Pliki wspólne dla wersji dla X11 oraz dla SVGALib.
 Summary:	Lincity for X11
 Summary(pl):	Lincity dla X11
 Group:		X11/Applications/Games/Strategy
-Group(de):	X11/Applications/Spiele/Strategie
-Group(pl):	X11/Aplikacje/Gry/Strategiczne
 Requires:	%{name} = %{version}
 
 %description X11
