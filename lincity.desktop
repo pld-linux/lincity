@@ -4,4 +4,5 @@ Description=City/country simulation strategy game
 Description[pl]=Gra strategiczna symulująca kraj/miasto
 Icon=lincity.png
 Exec=/usr/games/xlincity
+Type=Application
 # vi: encoding=utf-8
