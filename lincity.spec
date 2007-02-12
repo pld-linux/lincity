@@ -3,7 +3,7 @@
 %bcond_without	svga	# without svgalib support
 #
 Summary:	Lincity is a city/country simulation game for X11 and Linux SVGALib
-Summary(pl):	Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
+Summary(pl.UTF-8):   Lincity jest symulatorem miasta/kraju dla X11 oraz SVGALib
 Name:		lincity
 Version:	1.13.1
 Release:	1
@@ -33,37 +33,37 @@ it's up to you. Due to the finite resources available in any one
 place, this is not a game that you can leave for long periods of time.
 This package contains shared files for X11 and SVGALib.
 
-%description -l pl
-Gra strategiczna dla X11 oraz SVGALib. Trzeba wybudowaæ miasto i nim
-zarz±dzaæ. Trzeba karmiæ mieszkañców, zapewniæ im mieszkanie, pracê i
-inne dobra. Mo¿na stworzyæ solidn± gospodarkê korzystaj±c z odnawialnych 
-¼róde³ energii i przetwórstwa odpadów. Mo¿na te¿ wielkim wysi³kiem 
-zbudowaæ rakiety, aby uciec z zanieczyszczonej, pozbawionej zasobów 
-planety. Ca³e ¿ycie miasta znajduje siê w rêkach gracza. Ten pakiet 
-zawiera pliki wspólne dla wersji X11 oraz SVGALib.
+%description -l pl.UTF-8
+Gra strategiczna dla X11 oraz SVGALib. Trzeba wybudowaÄ‡ miasto i nim
+zarzÄ…dzaÄ‡. Trzeba karmiÄ‡ mieszkaÅ„cÃ³w, zapewniÄ‡ im mieszkanie, pracÄ™ i
+inne dobra. MoÅ¼na stworzyÄ‡ solidnÄ… gospodarkÄ™ korzystajÄ…c z odnawialnych 
+ÅºrÃ³deÅ‚ energii i przetwÃ³rstwa odpadÃ³w. MoÅ¼na teÅ¼ wielkim wysiÅ‚kiem 
+zbudowaÄ‡ rakiety, aby uciec z zanieczyszczonej, pozbawionej zasobÃ³w 
+planety. CaÅ‚e Å¼ycie miasta znajduje siÄ™ w rÄ™kach gracza. Ten pakiet 
+zawiera pliki wspÃ³lne dla wersji X11 oraz SVGALib.
 
 %package X11
 Summary:	Lincity for X11
-Summary(pl):	Lincity dla X11
+Summary(pl.UTF-8):   Lincity dla X11
 Group:		X11/Applications/Games/Strategy
 Requires:	%{name} = %{version}-%{release}
 
 %description X11
 Executable version for X11.
 
-%description X11 -l pl
+%description X11 -l pl.UTF-8
 Program wykonywalny dla X11.
 
 %package svga
 Summary:	Lincity for SVGALib
-Summary(pl):	Lincity dla SVGALib
+Summary(pl.UTF-8):   Lincity dla SVGALib
 Group:		Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
 %description svga
 Executable version for SVGALib.
 
-%description svga -l pl
+%description svga -l pl.UTF-8
 Program wykonywalny dla SVGALib.
 
 %prep
