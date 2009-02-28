@@ -8,7 +8,7 @@ Name:		lincity
 Version:	1.13.1
 Release:	1
 License:	GPL
-Group:		Applications/Games
+Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/lincity/%{name}-%{version}.tar.gz
 # Source0-md5:	2d37906d4b141cd457ec93d778bb8fe1
 Source1:	%{name}.desktop
@@ -57,7 +57,7 @@ Program wykonywalny dla X11.
 %package svga
 Summary:	Lincity for SVGALib
 Summary(pl.UTF-8):	Lincity dla SVGALib
-Group:		Applications/Games
+Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
 %description svga
