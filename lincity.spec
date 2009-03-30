@@ -57,7 +57,7 @@ Program wykonywalny dla X11.
 %package svga
 Summary:	Lincity for SVGALib
 Summary(pl.UTF-8):	Lincity dla SVGALib
-Group:		X11/Applications/Games
+Group:		Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
 %description svga
