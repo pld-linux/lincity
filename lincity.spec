@@ -14,13 +14,13 @@ Source0:	http://dl.sourceforge.net/lincity/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://lincity.sourceforge.net/
-BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 %{?with_svga:BuildRequires:	svgalib-devel}
+BuildRequires:	xorg-lib-libXext-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -36,11 +36,11 @@ This package contains shared files for X11 and SVGALib.
 %description -l pl.UTF-8
 Gra strategiczna dla X11 oraz SVGALib. Trzeba wybudować miasto i nim
 zarządzać. Trzeba karmić mieszkańców, zapewnić im mieszkanie, pracę i
-inne dobra. Można stworzyć solidną gospodarkę korzystając z odnawialnych 
-źródeł energii i przetwórstwa odpadów. Można też wielkim wysiłkiem 
-zbudować rakiety, aby uciec z zanieczyszczonej, pozbawionej zasobów 
-planety. Całe życie miasta znajduje się w rękach gracza. Ten pakiet 
-zawiera pliki wspólne dla wersji X11 oraz SVGALib.
+inne dobra. Można stworzyć solidną gospodarkę korzystając z
+odnawialnych źródeł energii i przetwórstwa odpadów. Można też wielkim
+wysiłkiem zbudować rakiety, aby uciec z zanieczyszczonej, pozbawionej
+zasobów planety. Całe życie miasta znajduje się w rękach gracza. Ten
+pakiet zawiera pliki wspólne dla wersji X11 oraz SVGALib.
 
 %package X11
 Summary:	Lincity for X11
@@ -82,6 +82,8 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_bindir}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
