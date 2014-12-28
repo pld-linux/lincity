@@ -16,7 +16,7 @@ Source2:	%{name}.png
 URL:		http://lincity.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	libpng-devel
 BuildRequires:	libtool
 %{?with_svga:BuildRequires:	svgalib-devel}
